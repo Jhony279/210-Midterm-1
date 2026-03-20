@@ -237,18 +237,30 @@ public: // Members that can be accessed outside the class after creating an inst
         cout << endl;
     }
 
+    // Method to print every other element in the list, starting with the first element
     void every_other_element(){
-        Node* current = tail;
+        Node* current = head;
         if (!current) { // If the list is empty, print message and return
             cout << "List is empty." << endl;
             return;
+        }
+
+        for (int i = 0; current; i++) { // Traverse the list
+            if (i % 2 == 0) // If the index is even, print the node's data
+                cout << current->data << " ";
+            current = current->next;
         }
     }
 };
 
 int main() {
-    cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
+    DoublyLinkedList list;
 
-    
+    for (int i = 0; i < 10; i++)
+        list.push_back(rand() % (MAX_NR - MIN_NR + 1) + MIN_NR);
+
+    list.print();
+    list.every_other_element();
+
     return 0;
 }
