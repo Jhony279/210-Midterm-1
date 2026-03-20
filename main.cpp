@@ -63,29 +63,33 @@ public: // Members that can be accessed outside the class after creating an inst
         temp->next = newNode;
     }
 
+    // Method to delete the first node that contains the specified value
     void delete_val(int value) {
-        if (!head) return;
+        if (!head) return; //return if list is empty
 
-        Node* temp = head;
+        Node* temp = head; 
         
+        // Traverse the list to find the node with the specified value
         while (temp && temp->data != value)
             temp = temp->next;
 
-        if (!temp) return; 
+        if (!temp) return; // Return if value isnt found in list
 
-        if (temp->prev)
+        // stitch the previous and next nodes of temp together
+        if (temp->prev) // If temp has a prev. node:
             temp->prev->next = temp->next;
         else
             head = temp->next; 
 
-        if (temp->next)
+        if (temp->next) // if temp has a next node:
             temp->next->prev = temp->prev;
         else
             tail = temp->prev; 
 
-        delete temp;
+        delete temp; // Delete the node containing the value
     }
 
+    // Method to delete the node at a specified position
     void delete_pos(int pos) {
         if (!head) {
             cout << "List is empty." << endl;
