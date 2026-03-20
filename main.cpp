@@ -42,20 +42,23 @@ public: // Members that can be accessed outside the class after creating an inst
         }
 
         Node* temp = head;
+        // Traverse the list to find the node at the specified position
         for (int i = 0; i < position && temp; ++i)
             temp = temp->next;
 
-        if (!temp) {
+        if (!temp) { // If position exceeds list size, print message and delete new node
             cout << "Position exceeds list size. Node not inserted.\n";
             delete newNode;
             return;
         }
 
+        // If the position is valid:
+        // Stitch the new node into the list
         newNode->next = temp->next;
         newNode->prev = temp;
-        if (temp->next)
+        if (temp->next) // If temp isn't the last node, set the next node's prev to new node
             temp->next->prev = newNode;
-        else
+        else // Otherwise, update tail to the new node
             tail = newNode;
         temp->next = newNode;
     }
