@@ -150,81 +150,99 @@ public: // Members that can be accessed outside the class after creating an inst
     
     // Method to add a new node with the specified data at the beginning of the list
     void push_front(int v) {
+        // Create a new node with the given value
         Node* newNode = new Node(v);
-        if (!head)
+        if (!head) // If list is empty, set head and tail to the new node
             head = tail = newNode;
-        else {
+        else { // Otherwise, stitch new node at the start of the list and update head
             newNode->next = head;
             head->prev = newNode;
             head = newNode;
         }
     }
     
+    // Method to remove the first node from the list
     void pop_front() {
 
-        if (!head) {
+        if (!head) { // If the list is empty, print message and return
             cout << "List is empty." << endl;
             return;
         }
 
         Node * temp = head;
 
+        // If there's more than one node in the list:
+        // update head to next node and set its prev to null
         if (head->next) {
             head = head->next;
             head->prev = nullptr;
         }
-        else
+        else // If there's only one node, set head and tail to null
             head = tail = nullptr;
-        delete temp;
+        delete temp; // Delete the old head node
     }
 
+    // Method to remove the last node from the list
     void pop_back() {
-        if (!tail) {
+        if (!tail) { // If the list is empty, print message and return
             cout << "List is empty." << endl;
             return;
         }
         Node * temp = tail;
 
+        // If there's more than one node in the list:
+        // update tail to previous node and set its next to null
         if (tail->prev) {
             tail = tail->prev;
             tail->next = nullptr;
         }
-        else
+        else // If there's only one node, set head and tail to null
             head = tail = nullptr;
-        delete temp;
+        delete temp; // Delete the old tail node
     }
 
+    // Destructor to clean up memory by deleting all nodes in the list
     ~DoublyLinkedList() {
-        while (head) {
-            Node* temp = head;
-            head = head->next;
-            delete temp;
+        while (head) { // While there are still nodes in the list:
+            Node* temp = head; // Store the current head node in temp
+            head = head->next; // Move head to the next node in the list
+            delete temp; // Delete the old head node stored in temp
         }
     }
+    // Method to print the elements of the list from head to tail
     void print() {
         Node* current = head;
-        if (!current) {
+        if (!current) { // If the list is empty, print message and return
             cout << "List is empty." << endl;
             return;
         }
-        while (current) {
+        while (current) { // Traverse the list and print each node's data
             cout << current->data << " ";
             current = current->next;
         }
         cout << endl;
     }
 
+    // Method to print the elements of the list from tail to head
     void print_reverse() {
         Node* current = tail;
-        if (!current) { 
+        if (!current) { // If the list is empty, print message and return
             cout << "List is empty." << endl;
             return;
         }
-        while (current) {
+        while (current) { // Traverse the list in reverse and print each node's data
             cout << current->data << " ";
             current = current->prev;
         }
         cout << endl;
+    }
+
+    void every_other_element(){
+        Node* current = tail;
+        if (!current) { // If the list is empty, print message and return
+            cout << "List is empty." << endl;
+            return;
+        }
     }
 };
 
