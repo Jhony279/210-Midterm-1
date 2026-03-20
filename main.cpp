@@ -4,6 +4,7 @@ using namespace std;
 // Constants for minimum and maximum numbers and list sizes
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
 
+/// @brief A class representing a doubly linked list data structure
 class DoublyLinkedList {
 private:  // Private members that are only accesible inside the class itself
     struct Node {   // Node structure to represent each element in the list
@@ -254,13 +255,16 @@ public: // Members that can be accessed outside the class after creating an inst
 };
 
 int main() {
+    // Create an instance of the DoublyLinkedList class
     DoublyLinkedList list;
 
+    // Populate list with random integers between MIN_NR and MAX_NR
     for (int i = 0; i < 10; i++)
+    // Use the push_back method to add random integers to the end of the list
         list.push_back(rand() % (MAX_NR - MIN_NR + 1) + MIN_NR);
 
-    list.print();
-    list.every_other_element();
+    list.print(); // Print the entire list
+    list.every_other_element(); // Print every other element in the list
 
     return 0;
 }
