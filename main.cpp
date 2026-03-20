@@ -1,14 +1,17 @@
 #include <iostream>
 using namespace std;
 
+// Constants for minimum and maximum numbers and list sizes
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
 
 class DoublyLinkedList {
-private:
-    struct Node {
-        int data;
-        Node* prev;
-        Node* next;
+private:  // Private members that are only accesible inside the class itself
+    struct Node {   // Node structure to represent each element in the list
+        int data;   // The value stored in the node
+        Node* prev; // Points to the previous node in the list
+        Node* next; // Points to the next node in the list
+
+        // Constructor, initialize a node with data and optional prev. & next pointers
         Node(int val, Node* p = nullptr, Node* n = nullptr) {
             data = val; 
             prev = p;
@@ -16,20 +19,24 @@ private:
         }
     };
 
-    Node* head;
-    Node* tail;
+    Node* head; // Pointer to the first node in the list
+    Node* tail; // Pointer to the last node in the list
 
-public:
+public: // Members that can be accessed outside the class after creating an instance
+
+    // Constructor to initialize an empty list
     DoublyLinkedList() { head = nullptr; tail = nullptr; }
 
+    // Method to insert a new node with a int data after a specified position
     void insert_after(int value, int position) {
         if (position < 0) {
             cout << "Position must be >= 0." << endl;
             return;
         }
 
+        // Create a new node with the given value
         Node* newNode = new Node(value);
-        if (!head) {
+        if (!head) { // If the list is empty, set head and tail to the new node
             head = tail = newNode;
             return;
         }
