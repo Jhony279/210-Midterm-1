@@ -91,11 +91,13 @@ public: // Members that can be accessed outside the class after creating an inst
 
     // Method to delete the node at a specified position
     void delete_pos(int pos) {
+        // Check if the list is empty
         if (!head) {
             cout << "List is empty." << endl;
             return;
         }
     
+        // If the position is 1, call pop_front to remove the first node
         if (pos == 1) {
             pop_front();
             return;
@@ -103,7 +105,9 @@ public: // Members that can be accessed outside the class after creating an inst
     
         Node* temp = head;
     
+        // Traverse the list to find the node at the specified position
         for (int i = 1; i < pos; i++){
+            // If end of list is reached before the position, print message and return
             if (!temp) {
                 cout << "Position doesn't exist." << endl;
                 return;
@@ -111,33 +115,40 @@ public: // Members that can be accessed outside the class after creating an inst
             else
                 temp = temp->next;
         }
+        // If temp is null, it means the position doesn't exist in the list
         if (!temp) {
             cout << "Position doesn't exist." << endl;
             return;
         }
     
+        // If temp is the last node, call pop_back to remove it
         if (!temp->next) {
             pop_back();
             return;
         }
     
+        // If temp exists:
+        // Stitch the previous and next nodes of temp together, then delete temp
         Node* tempPrev = temp->prev;
         tempPrev->next = temp->next;
         temp->next->prev = tempPrev;
         delete temp;
     }
 
+    // Method to add a new node with the specified data at the end of the list
     void push_back(int v) {
+        // Create a new node with the given value
         Node* newNode = new Node(v);
-        if (!tail)
+        if (!tail) // If list is empty, set head and tail to the new node
             head = tail = newNode;
-        else {
+        else { // Otherwise, stitch new node at the end of the list and update tail
             tail->next = newNode;
             newNode->prev = tail;
             tail = newNode;
         }
     }
     
+    // Method to add a new node with the specified data at the beginning of the list
     void push_front(int v) {
         Node* newNode = new Node(v);
         if (!head)
